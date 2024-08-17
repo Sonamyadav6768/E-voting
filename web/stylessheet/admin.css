@@ -1,0 +1,204 @@
+*{
+    margin:0px;
+    padding:0px;
+    box-sizing:border-box;
+    font-family:'Times New Roman', Times, serif;
+}
+
+#box {
+    /*margin: auto;*/
+    /*border:2px solid red;*/
+    margin-top:7%;
+    display:flex;
+    justify-content:space-around;
+    border-radius:20px;
+}
+#box img{
+    width:100%;
+    border-radius:10px;
+}
+#dv1, #dv2, #dv3, #dv4 {
+  width:20%;
+  margin:0 4px;
+  text-align: center;
+}
+h1, h2, h3, h4, h5, h6{
+    color: white;
+}
+th, tr, td{
+    color: white;
+}
+th{
+    text-align: right;
+}
+
+#candidateform{
+    /*border:2px solid red;*/
+}
+
+#candidateform h3{
+    /*border:2px solid red;*/
+    font-size:32px;
+    margin-bottom:3%;
+}
+#candidateform table{
+    font-size:24px;
+    width:50vw;
+    /*border:2px solid yellow;*/
+}
+#candidateform table tbody tr{
+    /*border:2px solid green;*/
+}
+
+#candidateform table tbody tr th{
+    padding:10px;
+    text-align: center;
+    width:50vw;
+    /*border:2px solid green;*/
+} 
+
+#candidateform table tbody tr input[type="text"]{
+    padding:10px;
+    width:20vw;
+    backface-visibility: visible;
+    border: 0.5px solid white;
+    outline: none;
+    border-radius: 5px;
+    background: none;
+    font-size:20px;
+    color:white;
+}
+#candidateform table tbody tr td select
+{
+    padding:10px;
+    width:20vw;
+    backface-visibility: visible;
+    border: 0.5px solid white;
+    outline: none;
+    border-radius: 5px;
+    background: none;
+    font-size:20px;
+    color:white;
+}
+#candidateform table tbody tr td select option 
+{
+    color:purple;
+}
+
+#candidateform table tbody tr input[type="file"] 
+{
+    display:block;
+    margin:auto;
+    /*border:2px solid red;*/
+    padding:10px;
+    width:35vw;
+    text-align: center;
+    font-size: 20px;
+}
+
+#candidateform table tbody tr input[type="button"],input[type="reset"]
+{
+    font-size: 24px;
+    padding:10px;
+    width:20vw;
+    border-radius:10px;
+    background-color: purple;
+    color:white;
+    outline:none;
+    border:none;
+    font-weight:bold;
+}
+
+
+#heading{
+    display:flex;
+    width:30vw;
+    justify-content:space-around;
+    align-items:center;
+/*    border:2px solid yellow;*/
+}
+#cid{
+    font-size:22px;
+    border-radius:5px;
+    padding:5px;
+}
+#delete{
+    /*border:2px solid green;*/
+    font-size:30px;
+    color:white;
+}
+#addresp table
+{
+    margin:auto;
+}
+#addresp table tbody tr td img{
+    width:10vw;
+    height:20vh;
+    border-radius:100%;
+}
+#addresp table tbody tr th{
+    /*border:2px solid blue;*/
+    width:15vw;
+}
+#addresp table tbody tr td 
+{
+    text-align:center;
+    width:15vw;
+    /*border:2px solid yellow;*/
+}
+
+#delbtn{
+    font-size: 24px;
+    padding:10px;
+    width:20vw;
+    border-radius:10px;
+    background-color: purple;
+    color:white;
+    outline:none;
+    border:none;
+    font-weight:bold;
+}
+
+#button div{
+    display:flex;
+    width:50vw;
+    font-size: 30px;
+    justify-content: space-between;
+}
+
+#button div button{
+    font-size: 20px;
+    padding:10px;
+    width:20vw;
+    border-radius:10px;
+    background-color: purple;
+    color:white;
+    outline:none;
+    border:none;
+    font-weight:bold;
+}
+
+#result table {
+    margin:auto;
+}
+#result table tr{
+    padding:5px;
+    margin:5px;
+}
+#result table th{
+    font-size:24px;
+    text-align: center;
+    width:10vw;
+    padding:5px;
+    margin:2px;
+}
+#result table td
+{
+    font-size:22px;
+    text-align: center;
+}
+#result table tr td img{
+    width:5vw;
+    height:5vw;
+    border-radius: 100%;
+}
