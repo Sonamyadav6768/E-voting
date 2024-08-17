@@ -1,0 +1,134 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package evoting.controller;
+
+import evoting.dao.CandidateDao;
+import evoting.dao.UserDao;
+import evoting.dto.CandidateDTO;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import org.apache.tomcat.util.http.fileupload.FileItem;
+import org.apache.tomcat.util.http.fileupload.disk.DiskFileItemFactory;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+import org.apache.tomcat.util.http.fileupload.servlet.ServletRequestContext;
+
+/**
+ *
+ * @author Dell
+ */
+public class UpdateNewCandidateServlet extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        PrintWriter out=response.getWriter();
+        RequestDispatcher rd=null;
+        try{
+            DiskFileItemFactory df=new DiskFileItemFactory();
+            ServletFileUpload sfu=new ServletFileUpload(df);
+            ServletRequestContext srq=new ServletRequestContext(request);
+            List<FileItem> multiList=sfu.parseRequest(srq);
+            ArrayList<String>objValue=new ArrayList<>();
+            InputStream inp=null;
+            boolean ImageUploaded=true;
+            for(FileItem f:multiList)
+            {
+                if(f.isFormField())
+                {
+                    String value=f.getString();
+                    objValue.add(value);
+                }
+                else
+                {
+                    inp=f.getInputStream();
+                    if(f.getName().equals(""))
+                        ImageUploaded=false;
+                    System.out.println(f.getFieldName()+" "+f.getName());
+                }
+            }
+            CandidateDTO candidate=new CandidateDTO();
+            candidate.setCandidateid(objValue.get(0));
+            candidate.setUserid(objValue.get(1));
+            candidate.setCity(objValue.get(3));
+            candidate.setParty(objValue.get(4));
+            candidate.setSymbol(inp);
+            boolean result=(CandidateDao.updateCandidate(candidate,ImageUploaded) && UserDao.updateUser(objValue.get(1), candidate));
+            if(result)
+            {
+                rd=request.getRequestDispatcher("success.jsp");
+            }
+            else
+                rd=request.getRequestDispatcher("error.jsp");
+        }
+        catch(Exception ex)
+        {
+            ex.printStackTrace();
+            System.out.println("Exception in add candidate servlet");
+            rd=request.getRequestDispatcher("showexception.jsp");
+            request.setAttribute("Exception", ex);
+        }
+        
+        finally{
+            if(rd!=null)
+                rd.forward(request, response);
+        }
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
+}
